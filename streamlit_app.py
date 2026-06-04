@@ -614,21 +614,19 @@ if uploaded_file is not None:
 
             st.subheader("Medical Report")
 
-            pdf_file = generate_pdf_report(
+            pdf_data = generate_pdf_report(
                 tumor_type,
                 confidence,
                 tumor_area_percent,
                 severity
             )
 
-            with open(pdf_file, "rb") as f:
-
-                st.download_button(
-                    "📄 Download PDF Report",
-                    data=f,
-                    file_name="Brain_Tumor_Report.pdf",
-                    mime="application/pdf"
-                )
+            st.download_button(
+                "📄 Download PDF Report",
+                data=pdf_data,
+                file_name="Brain_Tumor_Report.pdf",
+                mime="application/pdf"
+            )
 
         # ==========================================
         # TAB 3
