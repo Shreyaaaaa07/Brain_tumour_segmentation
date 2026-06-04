@@ -105,55 +105,23 @@ def generate_pdf_report(
 ):
 
     pdf = FPDF()
-
     pdf.add_page()
 
     pdf.set_font("Arial", "B", 16)
-
-    pdf.cell(
-        200,
-        10,
-        txt="Brain Tumor Analysis Report",
-        ln=True,
-        align="C"
-    )
+    pdf.cell(200, 10, "Brain Tumor Analysis Report",
+             ln=True, align="C")
 
     pdf.ln(10)
 
     pdf.set_font("Arial", "", 12)
+    pdf.cell(200, 10, f"Tumor Type: {tumor_type}", ln=True)
+    pdf.cell(200, 10, f"Confidence: {confidence:.2f}%", ln=True)
+    pdf.cell(200, 10, f"Tumor Area: {tumor_area_percent:.2f}%", ln=True)
+    pdf.cell(200, 10, f"Severity: {severity}", ln=True)
 
-    pdf.cell(
-        200,
-        10,
-        txt=f"Tumor Type: {tumor_type}",
-        ln=True
-    )
+    pdf_output = pdf.output(dest="S").encode("latin-1")
 
-    pdf.cell(
-        200,
-        10,
-        txt=f"Confidence: {confidence:.2f}%",
-        ln=True
-    )
-
-    pdf.cell(
-        200,
-        10,
-        txt=f"Tumor Area: {tumor_area_percent:.2f}%",
-        ln=True
-    )
-
-    pdf.cell(
-        200,
-        10,
-        txt=f"Severity: {severity}",
-        ln=True
-    )
-
-    pdf.output("tumor_report.pdf")
-
-    return "tumor_report.pdf"
-
+    return pdf_output
 # ==================================================
 # GRAD-CAM FUNCTION
 # ==================================================
